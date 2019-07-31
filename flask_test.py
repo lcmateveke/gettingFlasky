@@ -1,5 +1,6 @@
 from flask import Flask
 #improving template
+from flask import render_template
 
 
 app = Flask(__name__)
@@ -36,7 +37,15 @@ def factors_display_rawHmtl(n):
 
 	html += "</ul> </body>"
 	return html
-factors_display_rawHmtl(20)te
+
+@app.route('/factors_D/<int:n>')
+def factors_display(n):
+	return render_template(
+			"factors.html", #name of render_template
+			number=n, #value for the number variable in render_template
+			factors = factors(n) # value for factors in template
+	)
+
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
